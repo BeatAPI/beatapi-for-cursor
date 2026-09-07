@@ -1,0 +1,174 @@
+{
+  "publisher": "beatcursor",
+  "name": "beatcursor",
+  "displayName": "BeatCursor",
+  "version": "0.0.20",
+  "description": "Use your BeatAPI account inside Cursor — models, pricing and usage.",
+  "icon": "resources/logo.png",
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "extensionDependencies": [],
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "beatcursor.toggleByok",
+        "title": "BeatCursor: Switch Routing (BeatAPI / Cursor)"
+      },
+      {
+        "command": "beatcursor.serverToggle",
+        "title": "BeatCursor: Toggle Local Server"
+      },
+      {
+        "command": "beatcursor.editRoutes",
+        "title": "BeatCursor: Edit Routes Config"
+      },
+      {
+        "command": "beatcursor.editProviders",
+        "title": "BeatCursor: Edit Providers Config"
+      },
+      {
+        "command": "beatcursor.openSettings",
+        "title": "BeatCursor: Open Settings"
+      },
+      {
+        "command": "beatcursor.toggleFileLog",
+        "title": "BeatCursor: Toggle File Logging (debug)"
+      },
+      {
+        "command": "beatcursor.openLogFile",
+        "title": "BeatCursor: Open Log File"
+      },
+      {
+        "command": "beatcursor.signIn",
+        "title": "BeatCursor: Sign In"
+      },
+      {
+        "command": "beatcursor.signOut",
+        "title": "BeatCursor: Sign Out"
+      },
+      {
+        "command": "beatcursor.showUsage",
+        "title": "BeatCursor: Show Balance and Usage"
+      },
+      {
+        "command": "beatcursor.topUp",
+        "title": "BeatCursor: Top Up Credits"
+      },
+      {
+        "command": "beatcursor.refreshModels",
+        "title": "BeatCursor: Refresh Models"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "beatcursor.topUp",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b"
+      },
+      {
+        "command": "beatcursor.showUsage",
+        "key": "ctrl+alt+u",
+        "mac": "cmd+alt+u"
+      }
+    ],
+    "configuration": {
+      "title": "BeatCursor",
+      "properties": {
+        "beatcursor.server.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Local server listen host"
+        },
+        "beatcursor.server.port": {
+          "type": "number",
+          "default": 39831,
+          "description": "Local server listen port"
+        },
+        "beatcursor.server.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-start local server on activation"
+        },
+        "beatcursor.collector.port": {
+          "type": "number",
+          "default": 14800,
+          "description": "Hook collector port (merged into the local server when 0)"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "beatcursor-sidebar",
+          "title": "BeatAPI",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "beatcursor-sidebar": [
+        {
+          "type": "webview",
+          "id": "beatcursor.panel",
+          "name": "BeatAPI"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test:server": "vitest run",
+    "vsix": "pnpm run package && pnpm exec vsce package --no-dependencies --allow-missing-repository --skip-license --allow-star-activation"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.111.0",
+    "@bufbuild/protobuf": "^2.12.0",
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-fastify": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1",
+    "@fastify/cors": "^11.2.0",
+    "@google/genai": "^2.7.0",
+    "@vakra-dev/supermarkdown": "^0.0.6",
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4",
+    "diff": "^9.0.0",
+    "fastify": "^5.8.5",
+    "fuse.js": "^7.3.0",
+    "gpt-tokenizer": "^3.4.0",
+    "hono": "^4.12.23",
+    "openai": "^6.46.0",
+    "pino": "^10.3.1",
+    "undici": "^8.3.0",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.0.0",
+    "@types/alpinejs": "^3.13.11",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.100.0",
+    "@types/ws": "^8.18.0",
+    "@vscode/vsce": "^3.9.1",
+    "alpinejs": "^3.15.12",
+    "esbuild": "^0.28.0",
+    "eslint": "^10.4.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.7"
+  },
+  "license": "AGPL-3.0-or-later"
+}

@@ -1,0 +1,27 @@
+.vscode/**
+.vscode-test/**
+.obfuscate-tmp/**
+out/**
+src/**
+tools/**
+scripts/**
+.gitignore
+.yarnrc
+.npmrc
+esbuild.js
+obfuscate.js
+vsc-extension-quickstart.md
+CHANGELOG.md
+pnpm-lock.yaml
+pnpm-workspace.yaml
+**/tsconfig.json
+**/eslint.config.mjs
+**/*.map
+**/.vscode-test.*
+vitest.config.ts
+.tmp-*
+.claude/**
+# 内部设计文档:不随扩展分发(unzip 一下就全看到了)
+docs/**
+AGENTS.md
+CLAUDE.md
