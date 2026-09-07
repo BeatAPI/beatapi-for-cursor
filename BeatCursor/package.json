@@ -2,7 +2,7 @@
   "publisher": "beatcursor",
   "name": "beatcursor",
   "displayName": "BeatCursor",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Use your BeatAPI account inside Cursor — models, pricing and usage.",
   "icon": "resources/logo.png",
   "main": "./dist/extension.js",

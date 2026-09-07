@@ -4,6 +4,15 @@ BeatCursor —— BeatAPI 的 Cursor 客户端。
 
 格式参考 [Keep a Changelog](http://keepachangelog.com/)。
 
+## [0.0.21]
+
+### 变更
+
+- 完整源码以 **AGPL-3.0-or-later** 公开发布,含上游 CCursor(cometix)的署名。
+- npm 包页写明两个托管安装脚本(macOS / Linux 与 Windows)。
+
+无功能变更:与 0.0.20 的运行行为一致。
+
 ## [0.0.15]
 
 ### 新增
