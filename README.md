@@ -142,3 +142,11 @@ See [`NOTICE`](./NOTICE) for attribution.
 ## License
 
 GNU Affero General Public License v3.0 or later. See [`LICENSE`](./LICENSE).
+
+## Current gateway compatibility (0.0.22)
+
+New text models continue to appear through the live gateway catalogue without a
+client release. Context and output limits explicitly configured by the gateway
+now remain intact, including output limits beyond the old 64K snapshot fallback.
+Missing or zero limits still use the existing fallback. This does not add media
+or data tools to Cursor; those use the BeatAPI Agent plugin or remote MCP.

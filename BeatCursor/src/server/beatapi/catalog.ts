@@ -259,7 +259,7 @@ export function buildCatalogFromTextModels(entries: TextModelEntry[]): BeatapiCa
       // 网关给了就用网关的;给 0 或没给都算"未配置",退回本地。
       contextLimit: entry.context_length && entry.context_length > 0 ? entry.context_length : local.context,
       maxOutputTokens: entry.max_output_tokens && entry.max_output_tokens > 0
-        ? Math.min(entry.max_output_tokens, MAX_OUTPUT_TOKENS)
+        ? entry.max_output_tokens
         : local.output,
       // 运营在模型管理里打的能力标签优先于快照的推断 —— 它是人写的事实。
       reasoning: capabilities.length > 0

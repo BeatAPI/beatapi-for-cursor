@@ -223,11 +223,11 @@ describe('buildCatalogFromTextModels', () => {
     expect(model?.maxOutputTokens).toBe(64_000)
   })
 
-  it('still caps a gateway-supplied output limit', () => {
+  it('uses an explicitly configured gateway output limit', () => {
     const [model] = buildCatalogFromTextModels([
       { ...ENTRIES[0], max_output_tokens: 1_000_000 },
     ]).models
-    expect(model.maxOutputTokens).toBe(64_000)
+    expect(model.maxOutputTokens).toBe(1_000_000)
   })
 
   it('reads capabilities from the operator tags rather than guessing', () => {
@@ -261,6 +261,15 @@ describe('buildCatalogFromTextModels', () => {
       ...ENTRIES,
     ])
     expect(catalog.models.map(m => m.id).sort()).toEqual(['claude-opus-5', 'gpt-5.6-sol'])
+  })
+})
+
+describe('current gateway limits', () => {
+  it('keeps the gateway output limit for a newly added model beyond the old 64K snapshot cap', () => {
+    const catalog = buildCatalogFromTextModels([{ id: 'gpt-6.1-sol', family: 'codex', endpoints: ['openai'], context_length: 272000, max_output_tokens: 128000, capabilities: ['Reasoning', 'Vision'] }])
+    expect(catalog.models[0].contextLimit).toBe(272000)
+    expect(catalog.models[0].maxOutputTokens).toBe(128000)
+    expect(toProviderModel(catalog.models[0]).maxOutputTokens).toBe(128000)
   })
 })
 
